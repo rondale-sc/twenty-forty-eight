@@ -1,15 +1,26 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service'
 import {
   bindKeyboardShortcuts,
   unbindKeyboardShortcuts
 } from 'ember-keyboard-shortcuts';
+import { computed } from '@ember/object'
+
+import Board from 'twenty-forty-eight/utils/board';
 
 export default Component.extend({
-  eventManager: service('event-manager'),
+  serializedBoard: computed('board', function() {
+    return this.board.serialized();
+  }),
 
   init() {
     this._super(...arguments);
+
+    this.board = window.board = new Board([
+      [0, 0, 0, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 0, 0]
+    ]);
 
     this.keyboardShortcuts = {
       up: 'up',
@@ -31,16 +42,16 @@ export default Component.extend({
 
   actions: {
     up() {
-      console.log('up');
+      this.set('board', this.board.move('up'));
     },
     down() {
-      console.log('down');
+      this.set('board', this.board.move('down'));
     },
     right() {
-      console.log('right');
+      this.set('board', this.board.move('right'));
     },
     left() {
-      console.log('left');
+      this.set('board', this.board.move('left'));
     }
   }
 });

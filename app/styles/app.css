@@ -1,0 +1,52 @@
+html, body {
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  color: #776e65;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  width: 25%;
+  position: relative;
+}
+
+td:after {
+  content: '';
+  display: block;
+  margin-top: 100%;
+}
+td .content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.cell-2 {
+  background-color: #eee4da;
+}
+
+.cell-4 {
+  color: white;
+  background-color: #bbada0;
+}
+
+.cell-0 {
+  background-color: #776e65;
+}
+
+.cell-8 {
+  background-color:#f2b179;
+}
+
+.cell-16 {
+  background-color: #f59563;
+}
+
+.cell-32 {
+  background-color: #f67c5f;
+}
