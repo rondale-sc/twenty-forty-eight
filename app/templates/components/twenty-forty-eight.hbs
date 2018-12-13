@@ -1,11 +1,13 @@
-<table>
-  {{#each serializedBoard as |row| }}
-  <tr>
-    {{#each row as |cell|}}
-      <td class={{concat 'cell-' cell}}>
-        <div class='content'>{{cell}}</div>
-      </td>
+<div class="board-container">
+  <table>
+    {{#each serializedBoard as |row| }}
+    <tr>
+      {{#each row as |cell|}}
+        <td class={{concat 'cell-' cell}}>
+          <div class='content'>{{cell}}</div>
+        </td>
+      {{/each}}
+    </tr>
     {{/each}}
-  </tr>
-  {{/each}}
-</table>
+  </table>
+</div>
