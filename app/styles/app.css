@@ -47,8 +47,11 @@ td .content {
 
   margin: 0;
   margin-right: -50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 55px;
+  font-weight: 700;
 }
 
 table tr td:first-child {
@@ -81,12 +84,15 @@ table tr td {
 
 .cell-8 {
   background-color:#f2b179;
+  color: rgb(249, 246, 242);
 }
 
 .cell-16 {
   background-color: #f59563;
+  color: rgb(249, 246, 242);
 }
 
 .cell-32 {
+  color: rgb(249, 246, 242);
   background-color: #f67c5f;
 }

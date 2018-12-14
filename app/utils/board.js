@@ -23,36 +23,24 @@ export default class Board {
 
   down() {
     let columns = rotate(this.state);
-
     columns = columns.map(Board.lfold);
-
-    columns = rotate(columns);
-    columns = rotate(columns);
-    columns = rotate(columns);
+    columns = rotate(columns,3);
 
     return new Board(columns);
   }
 
   up() {
-    let columns = rotate(this.state);
-    columns = rotate(columns);
-    columns = rotate(columns);
-
+    let columns = rotate(this.state, 3);
     columns = columns.map(Board.lfold);
-
     columns = rotate(columns);
 
     return new Board(columns);
   }
 
   right() {
-    let columns = rotate(this.state);
-    columns = rotate(columns);
-
+    let columns = rotate(this.state, 2);
     columns = columns.map(Board.lfold);
-
-    columns = rotate(columns);
-    columns = rotate(columns);
+    columns = rotate(columns, 2);
 
     return new Board(columns);
   }
