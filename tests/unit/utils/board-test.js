@@ -77,17 +77,17 @@ module('Unit | Utility | board', function (hooks) {
 
     test('double merge', function(assert) {
       let initial = [
-        [0, 0, 2, 0],
-        [0, 0, 2, 0],
         [0, 0, 4, 0],
-        [0, 0, 4, 0]
+        [0, 0, 4, 0],
+        [0, 0, 2, 0],
+        [0, 0, 2, 0]
       ];
 
       let expected = [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-        [0, 0, 4, 0],
-        [0, 0, 8, 0]
+        [0, 0, 8, 0],
+        [0, 0, 4, 0]
       ];
 
       let board = new Board(initial);

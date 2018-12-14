@@ -61,17 +61,21 @@ export default class Board {
   }
 
   static lfold(column) {
-    let newColumn = column.reduce((accumulator, currentValue) => {
+    let lastAccumCanMerge = true;
 
+    let newColumn = column.reduce((accumulator, currentValue) => {
       let lastAccumValue = accumulator[accumulator.length - 1];
 
       if (currentValue === 0) {
         return accumulator;
       } else {
-        if (lastAccumValue === currentValue) {
+        if (lastAccumValue === currentValue && lastAccumCanMerge)  {
+          lastAccumCanMerge = false;
           accumulator[accumulator.length - 1] = lastAccumValue + currentValue; // merge
+
         } else {
           accumulator.push(currentValue);
+          lastAccumCanMerge = true;
         }
       }
       return accumulator;
