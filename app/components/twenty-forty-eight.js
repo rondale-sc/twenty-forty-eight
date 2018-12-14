@@ -3,7 +3,7 @@ import {
   bindKeyboardShortcuts,
   unbindKeyboardShortcuts
 } from 'ember-keyboard-shortcuts';
-import { computed } from '@ember/object'
+import { computed } from '@ember/object';
 
 import Board from 'twenty-forty-eight/utils/board';
 
@@ -15,7 +15,9 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    this.board = window.board = new Board([
+    this.internalScore = 0;
+
+    this.board = new Board([
       [0, 0, 0, 0],
       [0, 0, 2, 0],
       [0, 0, 2, 0],
@@ -29,6 +31,10 @@ export default Component.extend({
       left: 'left'
     }
   },
+
+  score: computed('board', function() {
+    return this.board.score;
+  }),
 
   didInsertElement() {
     this._super(...arguments);
