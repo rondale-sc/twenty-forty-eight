@@ -2,6 +2,7 @@ import rotate from 'twenty-forty-eight/utils/rotate';
 export default class Board {
   constructor(state) {
     this.state = state;
+    this.score = 0;
   }
 
   generateRandomTile(board) {
@@ -24,8 +25,14 @@ export default class Board {
     }
   }
 
+  setScore(board) {
+    board.score = this.score;
+  }
+
   move(direction) {
     let board = this[direction]();
+
+    this.setScore(board);
 
     this.generateRandomTile(board);
 
@@ -33,12 +40,13 @@ export default class Board {
   }
 
   left() {
-    return new Board(this.state.map(Board.lfold));
+    let columns = this.state.map((c) => this.lfold(c) );
+    return new Board(columns);
   }
 
   down() {
     let columns = rotate(this.state);
-    columns = columns.map(Board.lfold);
+    columns = columns.map((c) => this.lfold(c) );
     columns = rotate(columns,3);
 
     return new Board(columns);
@@ -46,7 +54,7 @@ export default class Board {
 
   up() {
     let columns = rotate(this.state, 3);
-    columns = columns.map(Board.lfold);
+    columns = columns.map((c) => this.lfold(c) );
     columns = rotate(columns);
 
     return new Board(columns);
@@ -54,13 +62,13 @@ export default class Board {
 
   right() {
     let columns = rotate(this.state, 2);
-    columns = columns.map(Board.lfold);
+    columns = columns.map((c) => this.lfold(c) );
     columns = rotate(columns, 2);
 
     return new Board(columns);
   }
 
-  static lfold(column) {
+  lfold(column) {
     let lastAccumCanMerge = true;
 
     let newColumn = column.reduce((accumulator, currentValue) => {
@@ -71,8 +79,9 @@ export default class Board {
       } else {
         if (lastAccumValue === currentValue && lastAccumCanMerge)  {
           lastAccumCanMerge = false;
-          accumulator[accumulator.length - 1] = lastAccumValue + currentValue; // merge
-
+          let mergedValue = lastAccumValue + currentValue;
+          accumulator[accumulator.length - 1] = mergedValue; // merge
+          this.score += mergedValue;
         } else {
           accumulator.push(currentValue);
           lastAccumCanMerge = true;
