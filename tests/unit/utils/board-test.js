@@ -6,6 +6,14 @@ import {
 } from 'qunit';
 
 module('Unit | Utility | board', function (hooks) {
+  hooks.beforeEach(()=> {
+    /*
+    * Isolate random tile generation:
+    *   Doing so explicitly here, but could instead opt to add a guard around
+    *   test environments. Still on the fence about the whole thing
+    */
+    Board.prototype.generateRandomTile = function() {};
+  });
 
   test('serialized', function (assert) {
     let initialBoardState = [
@@ -66,6 +74,29 @@ module('Unit | Utility | board', function (hooks) {
 
       assert.deepEqual(board.serialized(), expected)
     });
+
+    test('double merge', function(assert) {
+      let initial = [
+        [0, 0, 2, 0],
+        [0, 0, 2, 0],
+        [0, 0, 4, 0],
+        [0, 0, 4, 0]
+      ];
+
+      let expected = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 4, 0],
+        [0, 0, 8, 0]
+      ];
+
+      let board = new Board(initial);
+
+      board = board.move('down');
+
+      assert.deepEqual(board.serialized(), expected)
+
+    })
   });
 
   test('lfold', function(assert) {

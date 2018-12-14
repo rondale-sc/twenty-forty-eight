@@ -64,10 +64,11 @@ table tr:first-child td {
 
 table tr td {
   border-left: 0;
+  border-top: 0;
 }
 
-table tr td {
-  border-top: 0;
+@keyframes bounce {
+  to { transform: scale(1.4); }
 }
 
 .cell-2 {

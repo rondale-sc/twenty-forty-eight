@@ -1,13 +1,16 @@
+{{! template-lint-disable table-groups }}
 <div class="board-container">
   <table>
     {{#each serializedBoard as |row| }}
-    <tr>
-      {{#each row as |cell|}}
-        <td class={{concat 'cell-' cell}}>
-          <div class='content'>{{cell}}</div>
-        </td>
-      {{/each}}
-    </tr>
+      <tbody>
+        <tr>
+          {{#each row as |cell|}}
+            <td class={{concat "cell-" cell}}>
+              <div class="content">{{cell}}</div>
+            </td>
+          {{/each}}
+        </tr>
+      </tbody>
     {{/each}}
   </table>
 </div>

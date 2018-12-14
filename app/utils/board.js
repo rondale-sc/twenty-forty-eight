@@ -4,15 +4,30 @@ export default class Board {
     this.state = state;
   }
 
+  generateRandomTile(board) {
+    let arr = [2,4]
+    let randomTwoOrFour = arr[Math.floor(Math.random()*arr.length)];
+    let isSet = true;
+
+    while(isSet) {
+      let randomX = Math.floor(Math.random() * 4);
+      let randomY = Math.floor(Math.random() * 4);
+
+      /*
+      * TODO: Or GameOver! Will need to add later This will currently break
+      *   when there are no more moves to make
+      */
+      if(board.state[randomX][randomY] === 0) {
+        board.state[randomX][randomY] = randomTwoOrFour;
+        isSet = false;
+      }
+    }
+  }
+
   move(direction) {
     let board = this[direction]();
 
-    let randomX = Math.floor(Math.random() * 4);
-    let randomY = Math.floor(Math.random() * 4);
-
-    if(board.state[randomX][randomY] === 0) {
-      board.state[randomX][randomY] = 2;
-     }
+    this.generateRandomTile(board);
 
     return board;
   }
